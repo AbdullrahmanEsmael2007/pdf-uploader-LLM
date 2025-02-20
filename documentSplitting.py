@@ -11,9 +11,15 @@ embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 # Define boilerplate examples for semantic filtering
 noise_examples = [
     "Page 4", "Error fetching Wikipedia article", "Retrieved from Wikipedia",
-    "may refer to:", "Contents", "See also", "External links", "References",
-    "This article is about", "Table of Contents"
+    "may refer to:", "Contents", "See also", "External links",
+    "References", "This article is about", "Table of Contents",
+    "Abstract", "Introduction", "Chapter", "Appendix", "Bibliography",
+    "Acknowledgements", "Index", "Disclaimer", "Notice", "Copyright",
+    "All rights reserved", "Version", "Update", "For further reading",
+    "Contact information", "Terms and Conditions", "Additional Resources",
+    "Source:", "Published:", "Featured Article", "Summary", "Overview"
 ]
+
 noise_embeddings = embedding_model.encode(noise_examples, convert_to_tensor=True)
 
 
