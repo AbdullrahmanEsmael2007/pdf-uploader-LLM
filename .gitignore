@@ -3,9 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+tes.py
+generate-pdfs.py
+
 # C extensions
 *.so
-
+embeddings.py
 # Distribution / packaging
 .Python
 build/
