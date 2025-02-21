@@ -3,8 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-tes.py
 generate-pdfs.py
+wikipedia_pdfs
+docs
 
 # C extensions
 *.so

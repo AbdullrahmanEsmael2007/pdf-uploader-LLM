@@ -1,1 +1,11 @@
 langchain
+spacy
+sentence_transformers
+openai
+fpdf
+wikipedia
+langchain_community
+langchain_openai
+dotenv
+pypdf
+chromadb

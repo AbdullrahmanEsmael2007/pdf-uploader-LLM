@@ -92,28 +92,40 @@ def split_text_into_chunks(text, max_tokens=30, overlap=1):
 
     return chunks
 
+def cleaned_chunk(chunk):
+    return re.sub(r"[\n\t\r]+", " ", chunk).strip()
+
+
+
+from langchain.docstore.document import Document
 
 def process_loaded_documents(documents, max_tokens=30, overlap=1):
-    """
-    Processes a list of documents (loaded via PyPDFLoader) and splits their pages into cleaned chunks.
-    Returns a dictionary with document metadata and chunks.
-    """
-    all_chunks = {}
+    all_chunks = []
 
-    for doc_index, document in enumerate(documents):
-        doc_chunks = []
-
-        for page_index, page in enumerate(document):
-            text = page.page_content
-            chunks = split_text_into_chunks(text, max_tokens, overlap)
-
-            for i, chunk in enumerate(chunks):
-                doc_chunks.append({
-                    "page": page_index + 1,
-                    "chunk_number": i + 1,
-                    "chunk": chunk
-                })
-
-        all_chunks[f"Document_{doc_index + 1}"] = doc_chunks
+    for page in documents:
+        content = page.page_content
+        chunks = split_text_into_chunks(content, max_tokens, overlap)
+        
+        for chunk in chunks:
+            cleaned = cleaned_chunk(chunk)
+            all_chunks.append(
+                Document(
+                    page_content=cleaned,
+                    metadata=page.metadata
+                )
+            )
 
     return all_chunks
+
+"""
+[Document(metadata=
+        {'producer': 'PyFPDF 1.7.2 http://pyfpdf.googlecode.com/',
+        'creator': 'PyPDF', 
+        'creationdate': 'D:20250221033602',
+        'source': 'wikipedia_pdfs\\Chente_Barrera.pdf',
+        'total_pages': 1,
+        'page': 0, 
+        'page_label': '1'
+        },
+        page_content='Chente Barrera is a tejano musician from San Antonio, Texas. He won the 2007 Grammy Award in\nthe Best Tejano Album category as well as a Latin Grammy nomination for Sigue El Taconazo.\n== Discography ==\nPuro Taconazo (1998)\nMi Inspiracion (2002)\nSigue El Taconazo (2006)\n== References ==')]
+"""
