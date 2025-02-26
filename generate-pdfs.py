@@ -15,4 +15,4 @@ for i in range(AMOUNT):
     pdf.add_page()
     pdf.set_font("Arial", size=12)
     pdf.multi_cell(0, 10, txt=text)
-    pdf.output(f"wikipedia_pdfs/{PDFTITLE}.pdf")
+    pdf.output(f"pdfs/{PDFTITLE}.pdf")
