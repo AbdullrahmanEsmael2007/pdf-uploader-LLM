@@ -1,12 +1,7 @@
 from openai import OpenAI
-import dotenv
-import os
-dotenv.load_dotenv()
-api_key = os.getenv("OPENAI_API_KEY")
-client = OpenAI(api_key=api_key)
 
 
-def answer_question(question, context):
+def answer_question(question, context,api_key):
     PROMPT = f"""
         You are a helpful assistant. You have been given some text from a document.
         A user is asking you a question about the document. You should respond to their question
@@ -18,11 +13,12 @@ def answer_question(question, context):
         The user is asking: {str(question)}
     """
 
-    response = llm_response(PROMPT)
+    response = llm_response(PROMPT,api_key)
 
     return response
 
-def llm_response(prompt):
+def llm_response(prompt,api_key):
+    client = OpenAI(api_key=api_key)
     completion = client.chat.completions.create(
         model="gpt-4o",
         messages = [
