@@ -5,10 +5,10 @@ def answer_question(question, context,api_key):
     PROMPT = f"""
         You are a helpful assistant. You have been given some text from a document.
         A user is asking you a question about the document. You should respond to their question
-        based only on the information provided in the document. Do not make up a filename or use
-        any information that is not provided in the text. Instead, make up a reasonable filename
+        based only on the information provided in the document. Do not make up a answer or use
+        any information that is not provided in the text. Instead, make up a reasonable answer
         based on the content of the document or say you do not know. Answer their question in
-        the form of a single short sentence or phrase.
+        the form of a short paragraph.
         The document is:  {str(context)}
         The user is asking: {str(question)}
     """

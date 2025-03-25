@@ -13,4 +13,3 @@ def get_embedding_function(api_key) -> OpenAIEmbeddings:
     print(colored("\tEmbedding function created", 'yellow'))
     
     return embedding
-
